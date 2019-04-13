@@ -849,8 +849,11 @@
             this.gotoDate(this._d);
 
             if (this._o.field) {
+                var old_value = this._o.field.value;
                 this._o.field.value = this.toString();
-                fireEvent(this._o.field, 'change', { firedBy: this });
+                if(this._o.field.value != old_value) {
+                    fireEvent(this._o.field, 'change', { firedBy: this });
+                }
             }
             if (!preventOnSelect && typeof this._o.onSelect === 'function') {
                 this._o.onSelect.call(this, this.getDate());
