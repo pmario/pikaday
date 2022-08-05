@@ -358,6 +358,7 @@
         if (opts.isEndRange) {
             arr.push('is-endrange');
         }
+
         return '<td data-day="' + opts.day + '" class="' + arr.join(' ') + '" aria-selected="' + ariaSelected + '">' +
                  '<button class="pika-button pika-day" type="button" ' +
                     'data-pika-year="' + opts.year + '" data-pika-month="' + opts.month + '" data-pika-day="' + opts.day + '">' +
@@ -788,6 +789,8 @@
             
             opts.onPaginate = (typeof opts.onPaginate) === 'function' ? opts.onPaginate : null;
 
+            opts.selectDayFn = (typeof opts.selectDayFn) === 'function' ? opts.selectDayFn : null;
+
             var nom = parseInt(opts.numberOfMonths, 10) || 1;
             opts.numberOfMonths = nom > 4 ? 4 : nom;
 
@@ -901,6 +904,11 @@
             }
 
             this._d = new Date(date.getTime());
+
+            if (!preventOnSelect && typeof this._o.onSelect === 'function') {
+                this._o.onSelect.call(this, this.getDate());
+            }
+
             setToStartOfDay(this._d);
             this.gotoDate(this._d);
             
@@ -1237,7 +1245,7 @@
             for (var i = 0, r = 0; i < cells; i++)
             {
                 var day = new Date(year, month, 1 + (i - before)),
-                    isSelected = isDate(this._d) ? compareDates(day, this._d) : false,
+                    isSelected = !!opts.selectDayFn ? opts.selectDayFn(day) : (isDate(this._d) && compareDates(day, this._d)),
                     isToday = compareDates(day, now),
                     hasEvent = opts.events.indexOf(day.toDateString()) !== -1 ? true : false,
                     isEmpty = i < before || i >= (days + before),
