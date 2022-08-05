@@ -171,7 +171,7 @@ Pikaday has many useful options:
 * `showDaysInNextAndPreviousMonths` render days of the calendar grid that fall in the next or previous months (default: false)
 * `convertDateToMinOrMaxDate` If minDate or maxDate is supplied then by default `setDate` function will convert date to minDate, if passed date is less than minDate, or convert date to maxDate, if passed date is greater than maxDate. Set this to false if you dont want this behaviour. (default: true)
 * `enableSelectionDaysInNextAndPreviousMonths` allows user to select date that is in the next or previous months (default: false)
-* `numberOfMonths` number of visible calendars
+* `numberOfMonths` number of visible calendars (default: 1, maximum: 4)
 * `mainCalendar` when `numberOfMonths` is used, this will help you to choose where the main calendar will be (default `left`, can be set to `right`). Only used for the first display or when a selected date is not already visible
 * `events` array of dates that you would like to differentiate from regular days (e.g. `['Sat Jun 28 2017', 'Sun Jun 29 2017', 'Tue Jul 01 2017',]`)
 * `theme` define a classname that can be used as a hook for styling different themes, see [theme example][] (default `null`)
