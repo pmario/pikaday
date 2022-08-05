@@ -649,11 +649,13 @@
 
         self._onInputFocus = function()
         {
+			if(!this.readOnly)
             self.show();
         };
 
         self._onInputClick = function()
         {
+			if(!this.readOnly)
             self.show();
         };
 
