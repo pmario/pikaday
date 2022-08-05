@@ -1206,16 +1206,16 @@
                     left - width + fieldWidth > 0
                 )
             ) {
-                left = left - width + fieldWidth;
+                left = Math.max(left - width + fieldWidth, 0);
                 leftAligned = false;
             }
             if ((this._o.reposition && top + height > viewportHeight + scrollTop) ||
                 (
                     this._o.position.indexOf('top') > -1 &&
-                    top - height - field.fieldHeight > 0
+                    top - height - fieldHeight > 0
                 )
             ) {
-                top = top - height - fieldHeight;
+                top = Math.max(top - height - fieldHeight, 0);
                 bottomAligned = false;
             }
 
