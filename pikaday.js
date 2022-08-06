@@ -997,9 +997,10 @@
             }
 
             if (this._o.field) {
-                if(this._o.field.value != this.toString()) {
-                  this._o.field.value = this.toString();
-                  fireEvent(this._o.field, 'change', { firedBy: this });
+                var old_value = this._o.field.value;
+                this._o.field.value = this.toString();
+                if(this._o.field.value != old_value) {
+                    fireEvent(this._o.field, 'change', { firedBy: this });
                 }
             }
         },
