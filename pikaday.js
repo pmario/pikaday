@@ -661,7 +661,6 @@
             }
         };
 
-        self._onInputChange = function(e)
         var debounce;
 
         self._onInputChange = function (e) {
