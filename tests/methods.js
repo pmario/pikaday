@@ -19,16 +19,6 @@ describe('Pikaday public method', function ()
             expect(pikaday.toString()).to.be.empty;
         });
 
-        it('should return date string, formatted by moment, when date is set', function() {
-            var date = new Date(2014, 3, 25),
-            pikaday = new Pikaday({
-                format: 'DD-MM-YY'
-            });
-
-            pikaday.setDate(date);
-            expect(pikaday.toString()).to.eql('25-04-14');
-        });
-
         it('should use toString function if one is provided', function () {
             var date = new Date(2014, 3, 25),
             pikaday = new Pikaday({

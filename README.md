@@ -9,14 +9,13 @@ Pikaday
 ### A refreshing JavaScript Datepicker
 
 * Lightweight (less than 5kb minified and gzipped)
-* No dependencies (but plays well with [Moment.js][moment])
+* Absoluely no dependencies
 * Modular CSS classes for easy styling
 
 [**Try Pikaday Demo →**][Pikaday]
 
 ![Pikaday Screenshot][screenshot]
 
-**Production ready?** Since version 1.0.0 Pikaday is stable and used in production. If you do however find bugs or have feature requests please submit them to the [GitHub issue tracker][issues].
 Also see the [changelog](CHANGELOG.md)
 
 ## Installation
@@ -26,23 +25,11 @@ You can install Pikaday as an NPM package:
 npm install pikaday
 ```
 
-Or link directly to the CDN:
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
-```
-
 ## Styles
 You will also need to include Pikaday CSS file. This step depends on how Pikaday was installed. Either import from NPM:
 
 ```css
 @import './node_modules/pikaday/css/pikaday.css';
-```
-
-Or link to the CDN:
-
-```html
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
 ```
 
 ## Usage
@@ -109,7 +96,7 @@ This function has the following signature:
 
 You should return a string from it.
 
-Be careful, though. If the formatted string that you return cannot be correctly parsed by the `Date.parse` method (or by `moment` if it is available), then you must provide your own `parse` function in the config. This function will be passed the formatted string and the format:
+Be careful, though. If the formatted string that you return cannot be correctly parsed by the `Date.parse` method, then you must provide your own `parse` function in the config. This function will be passed the formatted string and the format:
 
 `parse(dateString, format = 'YYYY-MM-DD')`
 
@@ -149,8 +136,7 @@ Pikaday has many useful options:
 * `position` preferred position of the datepicker relative to the form field, e.g.: `top right`, `bottom right` **Note:** automatic adjustment may occur to avoid datepicker from being displayed outside the viewport, see [positions example][] (default to 'bottom left')
 * `reposition` can be set to false to not reposition datepicker within the viewport, forcing it to take the configured `position` (default: true)
 * `container` DOM node to render calendar into, see [container example][] (default: undefined)
-* `format` the default output format for `.toString()` and `field` value (requires [Moment.js][moment] for custom formatting)
-* `formatStrict` the default flag for moment's strict date parsing (requires [Moment.js][moment] for custom formatting)
+* `format` the default output format for `.toString()` and `field` value
 * `toString(date, format)` function which will be used for custom formatting. This function will take precedence over `moment`.
 * `parse(dateString, format)` function which will be used for parsing input string and getting a date object from it. This function will take precedence over `moment`.
 * `defaultDate` the initial date to view when first opened
@@ -197,62 +183,6 @@ If the `reposition` configuration-option is enabled (default), Pikaday will appl
 
 Note that the DOM element at any time will typically have 2 CSS-classes (eg. `top-aligned right-aligned` etc).
 
-## jQuery Plugin
-
-The normal version of Pikaday does not require jQuery, however there is a jQuery plugin if that floats your boat (see `plugins/pikaday.jquery.js` in the repository). This version requires jQuery, naturally, and can be used like other plugins:
-See the [jQuery example][] for a full version.
-
-```html
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="pikaday.js"></script>
-<script src="plugins/pikaday.jquery.js"></script>
-<script>
-
-// activate datepickers for all elements with a class of `datepicker`
-$('.datepicker').pikaday({ firstDay: 1 });
-
-// chain a few methods for the first datepicker, jQuery style!
-$('.datepicker').eq(0).pikaday('show').pikaday('gotoYear', 2042);
-
-</script>
-```
-
-## AMD support
-
-If you use a modular script loader, Pikaday is not bound to the global object and will fit nicely in your build process. You can require Pikaday just like any other module.
-See the [AMD example][] for a full version.
-
-```javascript
-require(['pikaday'], function(Pikaday) {
-    var picker = new Pikaday({ field: document.getElementById('datepicker') });
-});
-```
-The same applies for the jQuery plugin mentioned above.
-See the [jQuery AMD example][] for a full version.
-
-```javascript
-require(['jquery', 'pikaday.jquery'], function($) {
-    $('#datepicker').pikaday();
-});
-```
-
-## CommonJS module support
-
-If you use a CommonJS compatible environment you can use the require function to import Pikaday.
-
-
-```javascript
-var pikaday = require('pikaday');
-```
-
-When you bundle all your required modules with [Browserify][browserify] and you don't use [Moment.js][moment] specify the ignore option:
-
-`browserify main.js -o bundle.js -i moment`
-
-## Ruby on Rails
-
-If you're using **Ruby on Rails**, make sure to check out the [Pikaday gem][gem].
-
 ## Methods
 
 You can control the date picker after creation:
@@ -265,10 +195,9 @@ var picker = new Pikaday({ field: document.getElementById('datepicker') });
 
 `picker.toString('YYYY-MM-DD')`
 
-Returns the selected date in a string format. If [Moment.js][moment] exists (recommended) then Pikaday can return any format that Moment understands.
-You can also provide your own `toString` function and do the formatting yourself. Read more in the [formatting](#formatting) section.
+Returns the selected date in a string format.
 
-If neither `moment` object exists nor `toString` function is provided, JavaScript's default [`.toDateString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toDateString) method will be used.
+You can also provide your own `toString` function and do the formatting yourself. Read more in the [formatting](#formatting) section. If `toString` function is not provided, JavaScript's default [`.toDateString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toDateString) method will be used.
 
 `picker.getDate()`
 
@@ -276,15 +205,7 @@ Returns a basic JavaScript `Date` object of the selected day, or `null` if no se
 
 `picker.setDate('2015-01-01')`
 
-Set the current selection. This will be restricted within the bounds of `minDate` and `maxDate` options if they're specified. You can optionally pass a boolean as the second parameter to prevent triggering of the onSelect callback (true), allowing the date to be set silently.
-
-`picker.getMoment()`
-
-Returns a [Moment.js][moment] object for the selected date (Moment must be loaded before Pikaday).
-
-`picker.setMoment(moment('14th February 2014', 'DDo MMMM YYYY'))`
-
-Set the current selection with a [Moment.js][moment] object (see `setDate` for details).
+Set the current selection. This will be restricted within the bounds of `minDate` and `maxDate` options if they're specified. You can optionally pass a boolean as the second parameter to prevent triggering of the onSelect callback (true), allowing the date to be set silently
 
 ### Clear and reset date
 
@@ -406,7 +327,6 @@ Thanks to [@shoogledesigns][shoogledesigns] for the name.
 Copyright © 2014 David Bushell | BSD & MIT license
 
   [Pikaday]:     https://pikaday.com/                                             "Pikaday"
-  [moment]:      http://momentjs.com/                                             "moment.js"
   [browserify]:  http://browserify.org/                                           "browserify"
   [screenshot]:  https://raw.github.com/Pikaday/Pikaday/master/examples/screenshot.png  "Screenshot"
   [issues]:      https://github.com/Pikaday/Pikaday/issues                        "Issue tracker"
@@ -425,10 +345,6 @@ Copyright © 2014 David Bushell | BSD & MIT license
   [owen Pika]:   https://github.com/owenmead/Pikaday                              "Pikaday"
   [xeeali]:      https://github.com/xeeali                                        "@xeeali"
   [xeeali Pika]: https://github.com/xeeali/Pikaday                                "Pikaday"
-  [moment.js example]: https://pikaday.com/examples/moment.html    "Pikaday w/ moment.js"
-  [jQuery example]: https://pikaday.com/examples/jquery.html       "Pikaday w/ jQuery"
-  [AMD example]: https://pikaday.com/examples/amd.html             "Pikaday w/ AMD"
-  [jQuery AMD example]: https://pikaday.com/examples/jquery-amd.html "Pikaday w/ jQuery + AMD"
   [trigger example]: https://pikaday.com/examples/trigger.html     "Pikaday using custom trigger"
   [positions example]: https://pikaday.com/examples/positions.html "Pikaday using different position options"
   [container example]: https://pikaday.com/examples/container.html "Pikaday using custom calendar container"
