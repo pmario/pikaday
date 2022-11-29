@@ -1,9 +1,9 @@
-Pikaday
+Pikaday-X
 ========
 
-[![NPM version][npm-image]][npm-url]
+**This version has been modified**. See changelogs linked below the the commit messages here in the repo!
+
 [![License][license-image]][license-url]
-[![Downloads][downloads-image]][downloads-url]
 
 
 ### A refreshing JavaScript Datepicker
@@ -12,24 +12,25 @@ Pikaday
 * Absoluely no dependencies
 * Modular CSS classes for easy styling
 
-[**Try Pikaday Demo →**][Pikaday]
+[**Try Pikaday Demo**][Pikaday]
 
 ![Pikaday Screenshot][screenshot]
 
-Also see the [changelog](CHANGELOG.md)
+Also see the original [changelog](CHANGELOG.md)
+See live-issue-no-1 [additional changes](https://github.com/live627/pikaday/issues/1)
 
 ## Installation
 You can install Pikaday as an NPM package:
 
 ```shell
-npm install pikaday
+...
 ```
 
 ## Styles
 You will also need to include Pikaday CSS file. This step depends on how Pikaday was installed. Either import from NPM:
 
 ```css
-@import './node_modules/pikaday/css/pikaday.css';
+@import './path/to/css/pikaday.css';
 ```
 
 ## Usage
@@ -70,13 +71,12 @@ field.parentNode.insertBefore(picker.el, field.nextSibling);
 ### Formatting
 
 By default, dates are formatted and parsed using standard JavaScript Date object.
-If [Moment.js][moment] is available in scope, it will be used to format and parse input values. You can pass an additional `format` option to the configuration which will be passed to the `moment` constructor.
-See the [moment.js example][] for a full version.
+~~If [Moment.js][moment] is available in scope, it will be used to format and parse input values. You can pass an additional `format` option to the configuration which will be passed to the `moment` constructor.
+See the [moment.js example][] for a full version.~~ moment.js has been removed
 
 ```html
 <input type="text" id="datepicker" value="9 Oct 2014">
 
-<script src="moment.js"></script>
 <script src="pikaday.js"></script>
 <script>
     var picker = new Pikaday({
