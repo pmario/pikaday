@@ -3,8 +3,9 @@ Pikaday-X
 
 **This version has been modified**. See changelogs linked below the the commit messages here in the repo!
 
-[![License][license-image]][license-url]
+### License
 
+See. [License](LICENSE)
 
 ### A refreshing JavaScript Datepicker
 
@@ -19,15 +20,8 @@ Pikaday-X
 Also see the original [changelog](CHANGELOG.md)
 See live-issue-no-1 [additional changes](https://github.com/live627/pikaday/issues/1)
 
-## Installation
-You can install Pikaday as an NPM package:
-
-```shell
-...
-```
-
 ## Styles
-You will also need to include Pikaday CSS file. This step depends on how Pikaday was installed. Either import from NPM:
+You will also need to include Pikaday CSS file. This step depends on how Pikaday was installed.
 
 ```css
 @import './path/to/css/pikaday.css';
